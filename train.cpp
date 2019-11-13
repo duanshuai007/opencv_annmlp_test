@@ -12,6 +12,7 @@
 #include <climits>
 
 #include <dirent.h>
+#include <unistd.h>
 
 using namespace cv;
 using namespace ml;
@@ -191,7 +192,21 @@ Mat getOutputDataFromSignsVector(vector<Sign> roadSigns, int u32ClassNum, int u3
 
 void Train::train(void)
 {
-	char targetdir[] = "/home/swann/opencv/picture";
+	//char targetdir[] = "/home/swann/opencv/picture";
+	char targetdir[128];
+
+	memset(targetdir, 0, sizeof(targetdir));
+	int rslt = readlink("/proc/self/cwd", targetdir, sizeof(targetdir) - 1); 
+	if (rslt < 0 || (rslt >= sizeof(targetdir) - 1)) 
+	{   
+		cout << "readlink error" << endl;
+		exit(1);
+	}   
+	targetdir[rslt] = '\0';
+	printf("readlink:%s\n", targetdir);
+
+	strncat(targetdir, "/picture", strlen("/picture"));
+
 #if 1
 	const int classSum = 10;
 	const int imageSum = 20;

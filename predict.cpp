@@ -21,9 +21,12 @@ void Predict::predict(string filename)
 	Mat testMat;
 
 	cout << "测试：" << endl;
-	string dirPath = "/home/swann/opencv/picture";
+#if 0
+	string dirPath = "./picture";
 	string imgPath = dirPath + "/" + filename;
-
+#else
+	string imgPath = "./" + filename;
+#endif
 	cout << "img:" << imgPath << endl;
 	testMat = imread(imgPath, IMREAD_GRAYSCALE);
 	if (testMat.empty()) {
