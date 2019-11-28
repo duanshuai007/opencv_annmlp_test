@@ -1,5 +1,7 @@
 # `opencv_annmlp_test` 测试例子
 
+> 主分支:在ubuntu下进行的字符识别，该分支生成的xml不能用在海思相机上。
+
 > 该程序运行在202服务器的docker中。
 >> docker 容器名: opencv249_duan
 >> docker image: myopencv_test
